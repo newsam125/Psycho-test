@@ -5,7 +5,7 @@ export default function ExamplePage() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('/api/data'); // 使用相对路径
+      const response = await fetch('/.netlify/functions/getData');
       const result = await response.json();
       setData(result);
     }
@@ -16,9 +16,8 @@ export default function ExamplePage() {
 
   return (
     <div>
-      {/* 使用从API获取的数据 */}
       {data.map(item => (
-        <div key={item.id}>{item.name}</div>
+        <div key={item._id}>{item.name}</div>
       ))}
     </div>
   );
