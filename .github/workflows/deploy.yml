@@ -25,6 +25,9 @@ jobs:
       - name: 导出静态文件
         run: npm run export
         
+      - name: 添加.nojekyll文件
+        run: touch out/.nojekyll
+        
       - name: 部署到GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
