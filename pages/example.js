@@ -5,7 +5,7 @@ export default function ExamplePage() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('https://your-api-url.com/api/data');
+      const response = await fetch('/api/data'); // 使用相对路径
       const result = await response.json();
       setData(result);
     }
