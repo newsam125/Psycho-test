@@ -1,4 +1,11 @@
-module.exports = {
-  basePath: '/your-repo-name',
-  assetPrefix: '/your-repo-name/',
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  output: 'export',
+  images: {
+    unoptimized: true
+  },
+  assetPrefix: '.',
 }
+
+module.exports = nextConfig

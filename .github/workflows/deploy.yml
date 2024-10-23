@@ -1,35 +1,32 @@
-name: Deploy to GitHub Pages
+name: 部署Next.js站点到GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: 检出代码
+        uses: actions/checkout@v3
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - name: 设置Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
           
-      - name: Clean npm cache
-        run: npm cache clean --force
-          
-      - name: Install dependencies
+      - name: 安装依赖
         run: npm ci
         
-      - name: Build
+      - name: 构建项目
         run: npm run build
         
-      - name: Export
+      - name: 导出静态文件
         run: npm run export
         
-      - name: Deploy to GitHub Pages
+      - name: 部署到GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
