@@ -1,0 +1,5 @@
+# 添加以下内容
+.env.local
+.next
+out
+node_modules
