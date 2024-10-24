@@ -2,6 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/self-assessment": "pages/self-assessment.js",
   "/admin/login": "pages/admin/login.js",
-  "/api/admin/login": "pages/api/admin/login.js"
+  "/assessment/primary/mhrsp": "pages/assessment/primary/mhrsp.js",
+  "/assessment/primary/mht": "pages/assessment/primary/mht.js",
+  "/api/teachers": "pages/api/teachers.js",
+  "/api/saveResult": "pages/api/saveResult.js"
 }

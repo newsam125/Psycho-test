@@ -30,10 +30,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/admin/login.js"
     ],
-    "/teacher/login": [
+    "/assessment/primary/mhrsp": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/teacher/login.js"
+      "static/chunks/pages/assessment/primary/mhrsp.js"
+    ],
+    "/assessment/primary/mht": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/assessment/primary/mht.js"
+    ],
+    "/self-assessment": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/self-assessment.js"
     ]
   },
   "ampFirstPages": []
