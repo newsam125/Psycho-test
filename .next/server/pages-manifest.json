@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/self-assessment": "pages/self-assessment.js",
-  "/": "pages/index.js"
+  "/admin/login": "pages/admin/login.js",
+  "/api/admin/login": "pages/api/admin/login.js"
 }

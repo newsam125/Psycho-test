@@ -9,6 +9,7 @@ export default function TeacherDashboard() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [activeTab, setActiveTab] = useState('results');
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState('');
   const resultsPerPage = 10;
   const router = useRouter();
 
@@ -28,12 +29,19 @@ export default function TeacherDashboard() {
   };
 
   const fetchResults = async () => {
-    const response = await fetch('/api/teacher/results');
-    if (response.ok) {
-      const data = await response.json();
-      setResults(data);
-    } else {
-      console.error('Failed to fetch results');
+    try {
+      const response = await fetch('/api/teacher/results');
+      if (response.ok) {
+        const data = await response.json();
+        setResults(data);
+      } else if (response.status === 401) {
+        router.push('/teacher/login');
+      } else {
+        throw new Error('获取结果失败');
+      }
+    } catch (error) {
+      console.error('获取结果时发生错误:', error);
+      setError('获取结果时发生错误，请稍后再试');
     }
   };
 
@@ -68,6 +76,8 @@ export default function TeacherDashboard() {
       <h1>评估老师仪表板</h1>
       <p>欢迎，{teacherName}老师</p>
       
+      {error && <p className={styles.error}>{error}</p>}
+
       <div className={styles.tabs}>
         <button 
           className={activeTab === 'results' ? styles.activeTab : ''} 
