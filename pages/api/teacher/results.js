@@ -10,10 +10,44 @@ async function handler(req, res) {
 
     const { db } = await connectToDatabase();
     const results = await db.collection('results').find({ teacherId: teacher.id }).toArray();
-    res.status(200).json(results);
+
+    console.log('原始结果:', JSON.stringify(results, null, 2));
+
+    // 确保所有模块的数据都被正确处理
+    const processedResults = results.map(result => {
+      if (!result.mhtResults) {
+        console.log('警告: 结果缺少 mhtResults:', result);
+        result.mhtResults = [];
+      }
+
+      const processedMhtResults = result.mhtResults.map(module => {
+        if (typeof module.score === 'undefined') {
+          console.log('警告: 模块缺少分数:', module);
+        }
+        return {
+          ...module,
+          name: module.name || '未命名模块',
+          score: module.score || 0,
+        };
+      });
+
+      // 确保有 10 个模块
+      while (processedMhtResults.length < 10) {
+        processedMhtResults.push({ name: `模块 ${processedMhtResults.length + 1}`, score: 0 });
+      }
+
+      return {
+        ...result,
+        mhtResults: processedMhtResults,
+      };
+    });
+
+    console.log('处理后的结果:', JSON.stringify(processedResults, null, 2));
+
+    res.status(200).json(processedResults);
   } catch (error) {
     console.error('API 错误:', error);
-    res.status(500).json({ error: '服务器错误' });
+    res.status(500).json({ error: '服务器错误', details: error.message });
   }
 }
 

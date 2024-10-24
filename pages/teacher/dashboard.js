@@ -71,6 +71,27 @@ export default function TeacherDashboard() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const renderMHTResults = (result) => {
+    if (!result.mhtResults || result.mhtResults.length === 0) {
+      return '无数据';
+    }
+
+    const moduleNames = [
+      '学习焦虑', '对人焦虑', '孤独倾向', '自责倾向', '过敏倾向',
+      '身体症状', '恐怖倾向', '冲动倾向', '情绪不平衡', '心理不平衡'
+    ];
+
+    return (
+      <ul>
+        {result.mhtResults.map((module, index) => (
+          <li key={index}>
+            {moduleNames[index] || module.name}: {module.score}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className={styles.container}>
       <h1>评估老师仪表板</h1>
@@ -109,7 +130,7 @@ export default function TeacherDashboard() {
                     <th>学生姓名</th>
                     <th>年龄</th>
                     <th>评估时间</th>
-                    <th>结果</th>
+                    <th>MHT 结果</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -121,7 +142,7 @@ export default function TeacherDashboard() {
                       <td>{result.name}</td>
                       <td>{result.age}</td>
                       <td>{result.date}</td>
-                      <td>{result.description}</td>
+                      <td>{renderMHTResults(result)}</td>
                     </tr>
                   ))}
                 </tbody>
